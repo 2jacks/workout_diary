@@ -1,0 +1,19 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__wrapper {
+    width: 100%;
+    max-width: 300px;
+
+    padding: 15px;
+    box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
+  }
+  &__forgot-pass {
+    margin-top: 40px;
+    display: block;
+  }
+}
