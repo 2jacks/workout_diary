@@ -16,13 +16,23 @@ module.exports = {
 	entry: './src/index.tsx',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'main.bundle.js'
+		filename: 'main.bundle.js',
+		publicPath: '/'
 	},
 	resolve: {
+		alias: {
+			'@components': path.resolve(__dirname, 'src/app/components'),
+			'@pages': path.resolve(__dirname, 'src/app/pages'),
+			'@services': path.resolve(__dirname, 'src/app/services'),
+			'@hooks': path.resolve(__dirname, 'src/app/hooks'),
+			'@utils': path.resolve(__dirname, 'src/app/utils'),
+			'@contexts': path.resolve(__dirname, 'src/app/contexts')
+		},
 		extensions: ['.ts', '.tsx', '.js', '.jsx']
 	},
 	devServer: {
-		port: 4200
+		port: 4200,
+		historyApiFallback: true
 	},
 	module: {
 		rules: [
@@ -70,7 +80,7 @@ module.exports = {
 					to: path.resolve(__dirname, 'dist')
 				},
 				{
-					from: path.resolve(__dirname, 'src/assets/**/*'),
+					from: path.resolve(__dirname, 'src/app/assets/**/*'),
 					to: path.resolve(__dirname, 'dist/assets'),
 					noErrorOnMissing: true
 				}

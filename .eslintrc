@@ -6,9 +6,9 @@
     "no-debugger": "error",
 
     "comma-spacing": "warn",
-    "no-trailing-spaces": "warn",
+//    "no-trailing-spaces": "warn",
     "comma-dangle": "warn",
-
+    "prefer-const": "off",
     "@typescript-eslint/no-var-requires": 0
   },
   "env": {

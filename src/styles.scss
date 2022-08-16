@@ -6,3 +6,9 @@
     object-fit: cover;
   }
 }
+
+.form {
+  &__item {
+    margin-bottom: 20px;
+  }
+}

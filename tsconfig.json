@@ -16,6 +16,9 @@
       ],
       "@utils/*": [
         "./app/utils/*"
+      ],
+      "@contexts/*": [
+        "./app/contexts/*"
       ]
     },
     "module": "commonjs",
@@ -23,6 +26,7 @@
     "sourceMap": true,
     "jsx": "react",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": [
     "node_modules"
