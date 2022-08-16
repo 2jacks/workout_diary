@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": [
+        "./app/components/*"
+      ],
+      "@pages/*": [
+        "./app/pages/*"
+      ],
+      "@services/*": [
+        "./app/services/*"
+      ],
+      "@hooks/*": [
+        "./app/hooks/*"
+      ],
+      "@utils/*": [
+        "./app/utils/*"
+      ]
+    },
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "jsx": "react",
+    "allowJs": true,
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,8 @@
+.avatar {
+  width: 400px;
+  height: 500px;
+
+  &__logo {
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-debugger": "error",
+
+    "comma-spacing": "warn",
+    "no-trailing-spaces": "warn",
+    "comma-dangle": "warn",
+
+    "@typescript-eslint/no-var-requires": 0
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ]
+}
