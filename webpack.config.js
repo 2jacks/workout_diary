@@ -79,7 +79,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			scriptLoading: 'blocking',
-			minify: isProd
+			minify: false
 		}),
 		new ESLintWebpackPlugin({
 			fix: true
