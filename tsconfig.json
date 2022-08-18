@@ -19,6 +19,9 @@
       ],
       "@contexts/*": [
         "./app/contexts/*"
+      ],
+      "@constants/*": [
+        "./app/constants/*"
       ]
     },
     "module": "commonjs",

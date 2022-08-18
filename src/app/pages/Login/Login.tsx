@@ -1,18 +1,27 @@
 import * as React from 'react'
+import { useState } from 'react'
 import './Login.scss'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Form, Input, Checkbox, Button } from 'antd'
-import { Link } from 'react-router-dom'
+import { Form, Input, Checkbox, Button, Alert } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { useAuth } from '@hooks/auth/useAuth'
+import { ERRORS } from '@constants/http'
 
 const Login: React.FC = () => {
+	const auth = useAuth()
+	const navigate = useNavigate()
+
+	const [error, setError] = useState({ isError: false, message: null })
+
 	const formik = useFormik({
 		initialValues: {
-			email: '',
-			password: '',
+			email: '', // anton.nozdrin.21@mail.ru
+			password: '', // 315220kalter
 			remember: false
 		},
 		validationSchema: Yup.object({
@@ -20,13 +29,34 @@ const Login: React.FC = () => {
 			password: Yup.string().min(8, 'Пароль должен быть не менее 8 символов!')
 		}),
 		onSubmit: values => {
-			console.log(values)
+			auth.signIn(
+				values.email,
+				values.password,
+				values.remember,
+				(data, err) => {
+					if (err) {
+						setError({
+							isError: true,
+							message: ERRORS[err.message] || err.message
+						})
+					} else {
+						navigate('/')
+					}
+				}
+			)
 		}
 	})
 
 	return (
 		<div className='login'>
 			<div className='login__wrapper'>
+				{error.isError ? (
+					<Alert
+						message={error.message}
+						type='error'
+						style={{ marginBottom: '10px' }}
+					/>
+				) : null}
 				<Form
 					name='normal_login'
 					className='login-form'

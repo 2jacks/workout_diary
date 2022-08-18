@@ -1,37 +1,36 @@
 import { useState } from 'react'
 
-const fakeAuth = {
-	isAuthenticated: false,
-	signIn(cb) {
-		fakeAuth.isAuthenticated = true
-		setTimeout(cb, 100) // fake async
-	},
-	signOut(cb) {
-		fakeAuth.isAuthenticated = false
-		setTimeout(cb, 100)
-	}
-}
+import { AuthService } from '@services/authService'
 
 export function useProvideAuth() {
 	const [user, setUser] = useState(null)
 
-	const signIn = cb => {
-		return fakeAuth.signIn(() => {
-			setUser('user')
-			cb()
+	const signIn = async (
+		email: string,
+		password: string,
+		remember: boolean,
+		cb: (res: any, err: Error | null) => void
+	) => {
+		AuthService.signIn(email, password).then(res => {
+			if (!(res instanceof Error)) {
+				setUser(res.data)
+				cb(res, null)
+			} else {
+				cb(null, res)
+			}
 		})
 	}
 
-	const signOut = cb => {
-		return fakeAuth.signOut(() => {
-			setUser(null)
-			cb()
-		})
-	}
+	// const signOut = cb => {
+	// 	return fakeAuth.signOut(() => {
+	// 		setUser(null)
+	// 		cb()
+	// 	})
+	// }
 
 	return {
 		user,
-		signIn,
-		signOut
+		signIn
+		// signOut
 	}
 }

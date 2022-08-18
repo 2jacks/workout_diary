@@ -11,6 +11,7 @@ import Main from '@pages/Main/Main'
 import PrivateRoute from '@components/PrivateRoute'
 import Register from '@pages/Register/Register'
 import PasswordReset from '@pages/PasswordReset/PasswordReset'
+import TodayWorkout from '@pages/TodayWorkout/TodayWorkout'
 
 export const App = () => {
 	return (
@@ -21,14 +22,18 @@ export const App = () => {
 						<Route path='/login' element={<Login />} />
 						<Route path='/register' element={<Register />} />
 						<Route path='/password_reset' element={<PasswordReset />} />
+
 						<Route
 							path='/'
 							element={
+								// <Main />
 								<PrivateRoute>
 									<Main />
 								</PrivateRoute>
 							}
-						/>
+						>
+							<Route path='overview' element={<TodayWorkout />} />
+						</Route>
 					</Routes>
 				</Router>
 			</AuthContext>

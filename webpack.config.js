@@ -26,7 +26,8 @@ module.exports = {
 			'@services': path.resolve(__dirname, 'src/app/services'),
 			'@hooks': path.resolve(__dirname, 'src/app/hooks'),
 			'@utils': path.resolve(__dirname, 'src/app/utils'),
-			'@contexts': path.resolve(__dirname, 'src/app/contexts')
+			'@contexts': path.resolve(__dirname, 'src/app/contexts'),
+			'@constants': path.resolve(__dirname, 'src/app/constants')
 		},
 		extensions: ['.ts', '.tsx', '.js', '.jsx']
 	},
