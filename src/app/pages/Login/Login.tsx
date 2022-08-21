@@ -29,21 +29,18 @@ const Login: React.FC = () => {
 			password: Yup.string().min(8, 'Пароль должен быть не менее 8 символов!')
 		}),
 		onSubmit: values => {
-			auth.signIn(
-				values.email,
-				values.password,
-				values.remember,
-				(data, err) => {
-					if (err) {
-						setError({
-							isError: true,
-							message: ERRORS[err.message] || err.message
-						})
-					} else {
-						navigate('/')
-					}
-				}
-			)
+			auth
+				.signIn(values.email, values.password, values.remember)
+				.then(res => {
+					console.log('login res', res)
+					navigate('/', { state: { isAllowed: true } })
+				})
+				.catch(error => {
+					setError({
+						isError: true,
+						message: ERRORS[error.code] || error.code
+					})
+				})
 		}
 	})
 

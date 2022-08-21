@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react'
-import { useAuth } from '@hooks/auth/useAuth'
-import { Navigate, useLocation } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Navigate } from 'react-router-dom'
+
+import { authContext } from '@contexts/Auth/AuthContext'
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ children }) => {
-	const auth = useAuth()
-	const location = useLocation()
-	useEffect(() => {
-		console.log(auth.user)
-	}, [])
-	return auth.user ? (
-		children
-	) : (
-		<Navigate to='/login' state={{ from: location }} />
-	)
+	const auth = useContext(authContext)
+	return auth.user ? children : <Navigate to='/login' />
 }
 
 export default PrivateRoute

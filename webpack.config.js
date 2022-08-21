@@ -93,7 +93,9 @@ module.exports = {
 			minify: false
 		}),
 		new ESLintWebpackPlugin({
-			fix: true
+			fix: true,
+			emitWarning: false,
+			failOnWarning: false
 		})
 	],
 	optimization: {

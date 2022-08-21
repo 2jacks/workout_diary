@@ -3,8 +3,9 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-debugger": "error",
-
+    "no-debugger": "off",
+    "no-whitespace-before-property": "off",
+    "newline-per-chained-call": "warn",
     "comma-spacing": "warn",
 //    "no-trailing-spaces": "warn",
     "comma-dangle": "warn",

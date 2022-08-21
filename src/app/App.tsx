@@ -26,7 +26,6 @@ export const App = () => {
 						<Route
 							path='/'
 							element={
-								// <Main />
 								<PrivateRoute>
 									<Main />
 								</PrivateRoute>
