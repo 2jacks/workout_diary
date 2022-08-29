@@ -1,8 +1,6 @@
 import * as React from 'react'
-import { useContext } from 'react'
 import { createContext, useEffect, useState } from 'react'
 import { AuthService } from '@services/authService'
-// import { getUserFromLocalStorage } from '@utils/getUserFromLocalStorage'
 
 import {
 	getAuth,
@@ -13,6 +11,14 @@ import {
 	browserLocalPersistence,
 	browserSessionPersistence
 } from 'firebase/auth'
+
+/*
+ * TODO:
+ *  1. Перенести запросы в сервис
+ *  2. Изолировать обработку ошибок
+ *  3. Изолировать Firebase
+ *  4. Ошибки авторизации перенести в AuthContext
+ * */
 
 export const authContext = createContext(null)
 

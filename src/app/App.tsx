@@ -1,17 +1,19 @@
 import * as React from 'react'
 import 'antd/dist/antd.css'
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { AuthContext } from '@contexts/Auth/AuthContext'
 
-import Login from '@pages/Login/Login'
-import Main from '@pages/Main/Main'
-
 import PrivateRoute from '@components/PrivateRoute'
+
+import Login from '@pages/Login/Login'
 import Register from '@pages/Register/Register'
 import PasswordReset from '@pages/PasswordReset/PasswordReset'
-import TodayWorkout from '@pages/TodayWorkout/TodayWorkout'
+
+import Layout from '@pages/Layout/Layout'
+import Main from '@pages/Main/Main'
+import Statistics from '@pages/Statistics/Statistics'
 
 export const App = () => {
 	return (
@@ -27,11 +29,12 @@ export const App = () => {
 							path='/'
 							element={
 								<PrivateRoute>
-									<Main />
+									<Layout />
 								</PrivateRoute>
 							}
 						>
-							<Route path='overview' element={<TodayWorkout />} />
+							<Route index element={<Main />} />
+							<Route path='statistics' element={<Statistics />} />
 						</Route>
 					</Routes>
 				</Router>
