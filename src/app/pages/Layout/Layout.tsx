@@ -90,6 +90,7 @@ const Layout = () => {
 						placement='right'
 						onClose={onDrawerClose}
 						visible={isDrawerVisible}
+						contentWrapperStyle={{ maxWidth: '100vw' }}
 						bodyStyle={{ padding: '10px 15px 15px' }}
 					>
 						<List
