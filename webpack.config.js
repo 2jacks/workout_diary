@@ -27,7 +27,11 @@ module.exports = {
 			'@hooks': path.resolve(__dirname, 'src/app/hooks'),
 			'@utils': path.resolve(__dirname, 'src/app/utils'),
 			'@contexts': path.resolve(__dirname, 'src/app/contexts'),
-			'@constants': path.resolve(__dirname, 'src/app/constants')
+			'@constants': path.resolve(__dirname, 'src/app/constants'),
+			'%types': path.resolve(__dirname, 'src/app/types'),
+			'@models': path.resolve(__dirname, 'src/app/models'),
+			'@store': path.resolve(__dirname, 'src/app/store'),
+			'@http': path.resolve(__dirname, 'src/app/http')
 		},
 		extensions: ['.ts', '.tsx', '.js', '.jsx']
 	},

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Layout.scss'
 
 import { Layout as AntdLayout, Menu, Button, Drawer, List } from 'antd'
@@ -10,9 +10,12 @@ import {
 	RightOutlined
 } from '@ant-design/icons'
 
-import { Outlet, useNavigate, NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { Outlet, useNavigate, NavLink, useLocation } from 'react-router-dom'
 import { useScreenSize } from '@hooks/useScreenSize'
+import { useAuth } from '@hooks/useAuth'
+
+import { MuscleService } from '@services/muscleService'
+import { ExerciseService } from '@services/exerciseService'
 
 const { Sider, Content, Header } = AntdLayout
 
@@ -34,12 +37,27 @@ const menuItems: menuItem[] = [
 		label: 'Статистика',
 		key: 'statistics',
 		icon: <RiseOutlined />
+	},
+	{
+		label: 'Тренировки',
+		key: 'workouts',
+		icon: <RiseOutlined />
+	},
+	{
+		label: 'Упражнения',
+		key: 'exercises',
+		icon: <RiseOutlined />
 	}
 ]
 
 const Layout = () => {
+	const auth = useAuth()
+	const location = useLocation()
 	const navigate = useNavigate()
-	const [current, setCurrent] = useState('')
+
+	const [current, setCurrent] = useState(() => {
+		return location.pathname.slice(1)
+	})
 	const _onLinkClick = e => {
 		setCurrent(e.key)
 		navigate(`/${e.key}`)
@@ -52,15 +70,23 @@ const Layout = () => {
 	const [isSiderCollapsed, setIsSiderCollapsed] = useState(false)
 	const toggleSider = () => setIsSiderCollapsed(prev => !prev)
 
-	const [screenX, screenY] = useScreenSize()
+	const { screenWidth } = useScreenSize()
+
+	useEffect(() => {
+		MuscleService.getMuscles().then(res => {
+			console.log(res.data)
+		})
+		ExerciseService.getDefaultExercises().then(res => {
+			console.log(res.data)
+		})
+		// ExerciseService.getMyExercises(auth.user.uid).then(res => {
+		// 	console.log('mine', res.data)
+		// })
+	}, [])
 
 	return (
-		<AntdLayout
-			style={{
-				height: '100vh'
-			}}
-		>
-			{screenX > 768 ? (
+		<AntdLayout style={{ backgroundColor: 'inherit', height: '100vh' }}>
+			{screenWidth > 768 ? (
 				<Sider collapsed={isSiderCollapsed}>
 					<Menu
 						items={menuItems}
@@ -77,7 +103,10 @@ const Layout = () => {
 					/>
 				</Sider>
 			) : (
-				<Header className='layout__header--mobile'>
+				<Header
+					className='layout__header--mobile'
+					data-testid={'layout-header'}
+				>
 					<h2 className='layout__title'>Workout Diary</h2>
 					<Button
 						icon={
@@ -115,6 +144,7 @@ const Layout = () => {
 			<Content>
 				<div className='content-wrapper'>
 					<Outlet />
+					<Button onClick={auth.signOut}>Sign Out</Button>
 				</div>
 			</Content>
 		</AntdLayout>

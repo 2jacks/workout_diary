@@ -1,0 +1,16 @@
+.workout__desc {
+  display: flex;
+  gap: 50px;
+}
+
+.workout__card {
+
+}
+
+.workout__desc {
+  display: flex;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

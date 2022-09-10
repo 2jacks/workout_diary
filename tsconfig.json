@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "allowJs": true,
+
     "paths": {
       "@components/*": [
         "./app/components/*"
@@ -22,14 +28,23 @@
       ],
       "@constants/*": [
         "./app/constants/*"
+      ],
+      "%types/*": [
+        "./app/types/*"
+      ],
+      "@models/*": [
+        "./app/models/*"
+      ],
+      "@store/*": [
+        "./app/store/*"
+      ],
+      "@http/*": [
+        "./app/http/*"
       ]
     },
-    "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true,
-    "jsx": "react",
-    "allowJs": true,
+
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop" : true,
   },
   "exclude": [
     "node_modules"

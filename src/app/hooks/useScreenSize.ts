@@ -1,10 +1,21 @@
 import { useEffect, useState } from 'react'
 
-export function useScreenSize() {
-	const [size, setSize] = useState([window.innerWidth, window.innerHeight])
+export type screenSize = {
+	screenWidth: number
+	screenHeight: number
+}
+
+export function useScreenSize(): screenSize {
+	const [size, setSize] = useState<screenSize>({
+		screenWidth: window.innerWidth,
+		screenHeight: window.innerHeight
+	})
 
 	function updateSize() {
-		setSize([window.innerWidth, window.innerHeight])
+		setSize({
+			screenWidth: window.innerWidth,
+			screenHeight: window.innerHeight
+		})
 	}
 
 	useEffect(() => {

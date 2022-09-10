@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useState } from 'react'
+import React from 'react'
 import './Login.scss'
 
 import { useFormik } from 'formik'
@@ -9,14 +8,11 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { Form, Input, Checkbox, Button, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useAuth } from '@hooks/auth/useAuth'
-import { ERRORS } from '@constants/http'
+import { useAuth } from '@hooks/useAuth'
 
-const Login: React.FC = () => {
+const Login = () => {
 	const auth = useAuth()
 	const navigate = useNavigate()
-
-	const [error, setError] = useState({ isError: false, message: null })
 
 	const formik = useFormik({
 		initialValues: {
@@ -28,28 +24,22 @@ const Login: React.FC = () => {
 			email: Yup.string().email('Неправильно введена почта!'),
 			password: Yup.string().min(8, 'Пароль должен быть не менее 8 символов!')
 		}),
-		onSubmit: values => {
-			auth
-				.signIn(values.email, values.password, values.remember)
-				.then(res => {
-					console.log('login res', res)
-					navigate('/', { state: { isAllowed: true } })
-				})
-				.catch(error => {
-					setError({
-						isError: true,
-						message: ERRORS[error.code] || error.code
-					})
-				})
+		onSubmit: async values => {
+			let res = await auth.signIn(
+				values.email,
+				values.password,
+				values.remember
+			)
+			if (res) navigate('/')
 		}
 	})
 
 	return (
 		<div className='login'>
 			<div className='login__wrapper'>
-				{error.isError ? (
+				{auth.error ? (
 					<Alert
-						message={error.message}
+						message={auth.error}
 						type='error'
 						style={{ marginBottom: '10px' }}
 					/>

@@ -1,11 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 
-const Main = () => {
-	return (
-		<div>
-			<h1>Main Page</h1>
-		</div>
-	)
+function Main() {
+	return <div>Main</div>
 }
 
 export default Main

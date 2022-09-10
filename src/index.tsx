@@ -5,7 +5,7 @@ import { initializeApp } from 'firebase/app'
 
 import './styles.scss'
 
-import { App } from './app/App'
+import { App } from '@components/App'
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBfkdZuqaK4YLMSdcxLe1eEjj7wdw33_xE',

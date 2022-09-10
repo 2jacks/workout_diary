@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createContext, useEffect, useState } from 'react'
-import { AuthService } from '@services/authService'
+import { ERRORS } from '@constants/http'
 
 import {
 	getAuth,
@@ -17,7 +17,7 @@ import {
  *  1. Перенести запросы в сервис
  *  2. Изолировать обработку ошибок
  *  3. Изолировать Firebase
- *  4. Ошибки авторизации перенести в AuthContext
+ *  4. Ошибки авторизации перенести в AuthContext --
  * */
 
 export const authContext = createContext(null)
@@ -27,7 +27,7 @@ export function AuthContext({ children }) {
 	const auth = getAuth()
 	const [user, setUser] = useState(null)
 	const [pending, setPending] = useState(true)
-	const [error, setError] = useState({ code: null, message: null })
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		auth.onAuthStateChanged(user => {
@@ -36,12 +36,19 @@ export function AuthContext({ children }) {
 		})
 	}, [])
 
-	const signIn = (email: string, password: string, remember: boolean) => {
-		return setPersistence(
+	const signIn = async (email: string, password: string, remember: boolean) => {
+		return await setPersistence(
 			auth,
 			remember ? browserLocalPersistence : browserSessionPersistence
 		).then(() => {
 			return signInWithEmailAndPassword(auth, email, password)
+				.then(result => {
+					setError(null)
+					return result
+				})
+				.catch(error => {
+					setError(ERRORS[error.code] || error.code)
+				})
 		})
 	}
 
@@ -51,15 +58,14 @@ export function AuthContext({ children }) {
 				return userCredential.user
 			})
 			.catch(error => {
-				console.log('firebase err', error)
 				return new Error(error.message)
 			})
 	}
 
 	const signOut = () => {
-		return firebaseSignOut(auth)
+		firebaseSignOut(auth)
 			.then(() => {
-				// Sign-out successful.
+				console.log('Signed Out')
 			})
 			.catch(error => {
 				console.log(error)
@@ -71,7 +77,7 @@ export function AuthContext({ children }) {
 	}
 
 	return (
-		<authContext.Provider value={{ user, signIn, signUp, signOut }}>
+		<authContext.Provider value={{ user, signIn, signUp, signOut, error }}>
 			{children}
 		</authContext.Provider>
 	)

@@ -1,0 +1,18 @@
+.param-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+  &__name {
+    font-size: 14px;
+    color: #c2c2c2;
+    font-weight: 300;
+
+    margin-right: 7px;
+    margin-left: 4px;
+  }
+  &__value {
+    font-size: 14px;
+    color: #404040;
+    font-weight: 700;
+  }
+}
