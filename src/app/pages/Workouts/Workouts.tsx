@@ -3,6 +3,8 @@ import './Workouts.scss'
 
 import WorkoutCard from '@pages/Workouts/WorkoutCard/WorkoutCard'
 import { IWorkout } from '%types/workout'
+import Page from '@components/ui/Page/Page'
+import { Button } from 'antd'
 
 const mockWorkouts: IWorkout[] = [
 	{
@@ -51,7 +53,12 @@ function Workouts() {
 		<WorkoutCard key={index} workout={workout} />
 	))
 
-	return <div className='workouts-list'>{list}</div>
+	const extra = <Button>Добавить</Button>
+	return (
+		<Page title='Тренировки' extra={extra}>
+			<div className='workouts-list'>{list}</div>
+		</Page>
+	)
 }
 
 export default Workouts

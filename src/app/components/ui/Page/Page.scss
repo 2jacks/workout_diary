@@ -1,0 +1,11 @@
+.page {
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    font-size: 20px;
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
+}

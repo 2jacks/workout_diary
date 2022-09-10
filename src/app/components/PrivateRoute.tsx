@@ -7,7 +7,7 @@ interface Props {
 	children: React.ReactNode
 }
 
-const PrivateRoute = ({ children }: Props) => {
+const PrivateRoute = ({ children }: Props): any => {
 	const auth = useAuth()
 	return auth.user ? children : <Navigate to='/login' />
 }

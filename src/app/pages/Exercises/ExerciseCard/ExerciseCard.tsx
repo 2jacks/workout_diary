@@ -1,5 +1,5 @@
 import React from 'react'
-import './Exercise.scss'
+import './ExerciseCard.scss'
 
 import { IExercise } from '%types/exercise'
 import { Card, Tag } from 'antd'
@@ -14,7 +14,7 @@ interface ExerciseProps {
 	exercise: IExercise
 }
 
-function Exercise({ exercise }: ExerciseProps) {
+function ExerciseCard({ exercise }: ExerciseProps) {
 	const { name, muscles, repeats, sets, rest } = exercise
 
 	const musclesList = muscles.map((muscle, index) => (
@@ -56,4 +56,4 @@ function Exercise({ exercise }: ExerciseProps) {
 	)
 }
 
-export default Exercise
+export default ExerciseCard

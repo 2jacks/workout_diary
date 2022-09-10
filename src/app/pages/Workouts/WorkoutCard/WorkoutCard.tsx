@@ -7,7 +7,7 @@ import { IWorkout } from '%types/workout'
 import { Collapse, Tag, Divider, Table } from 'antd'
 import ParamRow from '@components/ui/ParamRow/ParamRow'
 import { useScreenSize } from '@hooks/useScreenSize'
-import Exercise from '@pages/Exercises/Exercise/Exercise'
+import ExerciseCard from '@pages/Exercises/ExerciseCard/ExerciseCard'
 import { ClockCircleOutlined, DatabaseOutlined } from '@ant-design/icons'
 const { Panel } = Collapse
 
@@ -105,7 +105,7 @@ function WorkoutCard({ workout }: WorkoutCardProps) {
 		)
 	} else {
 		exercisesLayout = workout.exercises.map((exercise, index) => (
-			<Exercise key={index} exercise={exercise} />
+			<ExerciseCard key={index} exercise={exercise} />
 		))
 	}
 
